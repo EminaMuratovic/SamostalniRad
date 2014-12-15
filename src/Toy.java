@@ -5,36 +5,42 @@ public class Toy {
 	private double price;
 	private int yearOfProduction;
 	private int ageRestriction;
+	private int quantity;
 
 	
 	
 	//kontruktori:
+	
 	/**
 	 * creates an object without parameters, makes default parameters
 	 */
 	public Toy() {
-		this("nepoznato", "nepoznato", 0, 2014, 0);
+		this("nepoznato", "nepoznato", 0, 2014, 0, 1);
 	}
+	
 	/**
 	 * creates an object with three of the parameters
 	 * @param name String given name
 	 * @param type String given type
 	 * @param price double given price
 	 */
-	public Toy(String name, String type, int price) {
+	public Toy(String name, String type, double price) {
 		this.name = name;
 		this.type = type;
 		this.price = price;
+		this.quantity = 1;
 		
 	}
+	
 	/**
 	 * creates an object with four of the parameters and the last parameter is year of production or age restriction
 	 * @param name String given name
 	 * @param type String given type
 	 * @param price double given price
 	 * @param yearOfProduction int given year of production or age restriction
+	 * @param quantity int given quantity
 	 */
-	public Toy(String name, String type, double price, int yearOfProduction) {
+	public Toy(String name, String type, double price, int yearOfProduction, int quantity) {
 		if(yearOfProduction > 100) 
 			{
 			this.ageRestriction = yearOfProduction;
@@ -47,9 +53,11 @@ public class Toy {
 		this.name = name;
 		this.type = type;
 		this.price = price;	
+		this.quantity = quantity;
 		
 		
 	}
+	
 	/**
 	 * creates an object with all of the parameters
 	 * @param name String given name
@@ -57,13 +65,15 @@ public class Toy {
 	 * @param price double given price
 	 * @param yearOfProduction int given year of production
 	 * @param ageRestriction int given age restriction
+	 * @param quantity int given quantity
 	 */
-	public Toy(String name, String type, double price, int yearOfProduction, int ageRestriction) {
+	public Toy(String name, String type, double price, int yearOfProduction, int ageRestriction, int quantity) {
 		this.name = name;
 		this.type = type;
 		this.price = price;
 		this.yearOfProduction = yearOfProduction;
 		this.ageRestriction = ageRestriction;
+		this.quantity = quantity;
 		
 	}
 	
@@ -79,6 +89,7 @@ public class Toy {
 		this.price = other.price;
 		this.yearOfProduction = other.yearOfProduction;
 		this.ageRestriction = other.ageRestriction;
+		this.quantity = other.quantity;
 		
 	}
 	
@@ -124,6 +135,14 @@ public class Toy {
 		return ageRestriction;
 	}
 	
+	/**
+	 * gets the quantity
+	 * @return quantity
+	 */
+	public int getQuantity() {
+		return quantity;
+	}
+	
 	
 	//seteri:
 	
@@ -133,8 +152,14 @@ public class Toy {
 	 * @return true or false
 	 */
 	public boolean setName(String name) {
-		this.name = name;
-		return true;
+		if(name.length() < 1) {
+			return false;
+		}
+		else {
+			this.name = name;
+			return true;
+		}
+		
 	}
 	
 	/**
@@ -143,8 +168,14 @@ public class Toy {
 	 * @return true or false
 	 */
 	public boolean setType(String type) {
-		this.type = type;
-		return true;
+		if(type.length() < 1) {
+			return false;
+		}
+		else {
+			this.type = type;
+			return true;
+		}
+		
 	}
 	
 	/**
@@ -153,8 +184,14 @@ public class Toy {
 	 * @return true or false
 	 */
 	public boolean setPrice(double price) {
-		this.price = price;
-		return true;
+		if(price < 0) {
+			return false;
+		}
+		else {
+			this.price = price;
+			return true;
+		}
+		
 	}
 	
 	/**
@@ -185,6 +222,21 @@ public class Toy {
 		}
 	}
 	
+	/**
+	 * sets the given quantity
+	 * @param quantity int quantity
+	 * @return true or false
+	 */
+	public boolean setQuantity(int quantity) {
+		if(quantity < 1) {
+			return false;
+		}
+		else {
+			this.quantity = quantity;
+			return true;
+		}
+	}
+	
 	//pretvaranje u string:
 	
 	/**
@@ -192,7 +244,13 @@ public class Toy {
 	 */	
 	public String toString() {
 		String str = "";
-		str = "Name: " + name + "; Type: " + type + "; Price: " + price + "; Year of production: " + yearOfProduction + "; Age restriction: " + ageRestriction + ";";
+		str += "\n\tName: " + name;
+		str += "\n\tType: " + type;
+		str += "\n\tPrice: " + price;
+		str += "\n\tYear of production: " + yearOfProduction;
+		str += "\n\tAge restriction: " + ageRestriction;
+		str += "\n\tQuantity: " + quantity  + "\n";
+		
 		return str;
 	}
 	
@@ -203,16 +261,26 @@ public class Toy {
 	 * @param other Toy object to compare this String against
 	 * @return true or false
 	 */
-	public String equals(Toy other) {
-		String str = "";
+	public boolean equals(Toy other) {
+	
 		if(this.name == other.name && this.type == other.type && this.price == other.price && this.yearOfProduction == other.yearOfProduction && this.ageRestriction == other.ageRestriction)
 			{
-			str = "Toys are equal, they are the same.";
+			return true;
 			}
 		else {
-			str = "Toys are not equal, they are not the same.";
+			return false;
 		}
-		return str;
+		
+	}
+	
+	//povecavanje kolicine istih igracaka:
+	
+	/**
+	 * increases the quantity of the toy
+	 * @param additional how much to increase
+	 */
+	public void increaseQuantity(int additional) {
+		this.quantity += additional;
 	}
 	
 	

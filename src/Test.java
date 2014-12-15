@@ -1,14 +1,21 @@
 
 public class Test {
 	public static void main(String[] args) {
-		Toy prvi = new Toy();
-		System.out.println(prvi.toString());
-		ToyStore jedan = new ToyStore();
-		jedan.addToys("Pujdo", "cuko", 50, 2000, 15);
+		Toy prva = new Toy();
+		Toy druga = new Toy("name2", "tip2", 12.32, 1989,2);
+		Toy treca = new Toy("name3", "tip3", 11.50, 2000,3);
+		Toy cetvrta = new Toy("name4", "tip4", 9.2, 2002,0);
+		ToyStore store = new ToyStore("Store 1");
+		store.addToys(prva);
+		store.addToys(druga);
+		store.addToys(treca);
+		store.addToys(cetvrta);
 		
-		System.out.println("ToyStore num1: " + jedan.toString());
 		
-		System.out.println(ToyStore.howMuch);
+		store.ThrowOutTheToy(prva);
+		
+		System.out.println(store.toString());
+		
 		
 	}
 
